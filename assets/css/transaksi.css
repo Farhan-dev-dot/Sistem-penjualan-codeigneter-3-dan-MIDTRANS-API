@@ -1,0 +1,53 @@
+body {
+	background-color: #f4f6f9; /* Light gray background for a softer look */
+	font-family: "Poppins", sans-serif; /* Custom font */
+}
+
+.menu-card,
+.cart-card {
+	border-radius: 1rem; /* Rounded corners for the cards */
+	transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+}
+
+.menu-card:hover,
+.cart-card:hover {
+	transform: translateY(-5px); /* Slightly lift the card on hover */
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.menu-item-card {
+	border-radius: 0.75rem; /* Rounded corners for menu item cards */
+	transition: transform 0.2s; /* Smooth transition for hover effects */
+}
+
+.menu-item-card:hover {
+	transform: translateY(-3px); /* Slightly lift the menu item card on hover */
+}
+
+.product-image {
+	height: 150px; /* Fixed height for images */
+	object-fit: cover; /* Maintain aspect ratio */
+	border-radius: 0.75rem; /* Rounded corners for images */
+}
+
+.table tbody tr:hover {
+	background-color: #e9ecef; /* Light gray on row hover */
+}
+
+.btn-success,
+.btn-primary,
+.btn-danger {
+	transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for button hover */
+}
+
+.btn-success:hover {
+	background-color: #218838; /* Darker green on hover */
+}
+
+.btn-primary:hover {
+	background-color: #0056b3; /* Darker blue on hover */
+}
+
+.btn-danger:hover {
+	background-color: #c82333; /* Darker red on hover */
+}

@@ -1,0 +1,148 @@
+.card {
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+	border-radius: 15px;
+	padding: 20px;
+	color: #fff;
+}
+
+.card-title {
+	font-family: "Poppins", sans-serif;
+	font-weight: 600;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card-text {
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.col-sm-6:nth-child(1) .card-body {
+	background: linear-gradient(135deg, #ff7e5f, #feb47b);
+}
+
+.col-sm-6:nth-child(2) .card-body {
+	background: linear-gradient(135deg, #43cea2, #185a9d);
+}
+
+.col-sm-6:nth-child(3) .card-body {
+	background: linear-gradient(135deg, #614385, #516395);
+}
+
+.col-sm-6:nth-child(4) .card-body {
+	background: linear-gradient(135deg, #c94b4b, #4b134f);
+}
+
+/* Responsiveness untuk card */
+@media (max-width: 768px) {
+	.card-text {
+		font-size: 1.5rem;
+	}
+
+	.btn-primary {
+		font-size: 0.9rem;
+		padding: 8px 16px;
+	}
+}
+body {
+	background-color: #f4f7fa; /* Warna latar belakang yang lebih cerah */
+}
+
+.card-chart {
+	border: none; /* Menghapus border */
+	border-radius: 1rem; /* Sudut yang lebih melengkung */
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih halus untuk efek kedalaman */
+	margin-bottom: 2rem; /* Memberikan jarak antar kartu */
+	transition: transform 0.3s; /* Efek transisi saat hover */
+}
+
+.card-chart:hover {
+	transform: translateY(-5px); /* Efek mengangkat saat hover */
+}
+
+.card-header-chart {
+	background-color: rgb(
+		188,
+		128,
+		39
+	); /* Warna latar belakang header yang cerah */
+	color: #ffffff; /* Warna teks yang kontras */
+	font-weight: bold; /* Teks yang lebih tebal */
+	text-align: center; /* Teks di tengah */
+	padding: 1rem; /* Ruang di dalam header */
+	border-top-left-radius: 1rem; /* Sudut melengkung di kiri atas */
+	border-top-right-radius: 1rem; /* Sudut melengkung di kanan atas */
+}
+
+.card-body-chart {
+	padding: 1rem; /* Ruang di dalam body */
+	display: flex; /* Memungkinkan elemen di dalam card untuk disusun secara fleksibel */
+	justify-content: center; /* Menyusun elemen di tengah */
+	align-items: center; /* Vertikal di tengah */
+}
+
+h1 {
+	font-family: "Poppins", sans-serif; /* Font yang modern */
+	color: #333; /* Warna teks yang lebih gelap */
+	margin-bottom: 3rem; /* Jarak bawah yang lebih besar */
+}
+
+/* CSS untuk card-table */
+.card-table {
+	border-radius: 10px; /* Membuat sudut card lebih melengkung */
+	border: 1px solid #dee2e6; /* Memberikan sedikit border yang lembut */
+	overflow: hidden; /* Agar konten dalam card tidak keluar dari border */
+}
+
+.card-table .card-header {
+	background-color: #979882; /* Warna latar belakang untuk header card */
+	color: white; /* Teks putih pada header */
+	font-family: "Poppins", sans-serif; /* Font modern yang ringan */
+	padding: 15px 20px; /* Memberikan ruang yang nyaman dalam header */
+	border-bottom: 1px solid #dee2e6; /* Border bawah yang lembut untuk pemisah */
+}
+
+.card-table .card-body {
+	padding: 20px; /* Memberikan ruang yang nyaman di body card */
+}
+
+.card-table .table {
+	margin-bottom: 0; /* Menghilangkan margin default bawah tabel */
+}
+
+.card-table .table th,
+.card-table .table td {
+	text-align: center; /* Pusatkan teks di tabel */
+	vertical-align: middle; /* Tengah secara vertikal */
+}
+
+.card-table .table-striped tbody tr:nth-of-type(odd) {
+	background-color: #f9f9f9; /* Warna stripe yang lembut untuk baris ganjil */
+}
+
+.card-table .table-hover tbody tr:hover {
+	background-color: #f1f1f1; /* Warna hover lembut */
+	transition: background-color 0.3s ease; /* Animasi halus saat hover */
+}
+
+.card-table .table-bordered th,
+.card-table .table-bordered td {
+	border: 1px solid #dee2e6; /* Border tabel */
+}
+
+/* Menambahkan bayangan lembut pada hover baris tabel */
+.card-table .table-hover tbody tr:hover {
+	box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+}
