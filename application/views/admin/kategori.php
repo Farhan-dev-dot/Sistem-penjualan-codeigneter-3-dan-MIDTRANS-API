@@ -29,12 +29,11 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col col-sm-3 col-xs-12">
-                            <h4 class="title">Data <span>kategori</span></h4>
-
+                            <h4 class="title">Data <span><?= $title; ?></span></h4>
                         </div>
                         <div class="col-sm-9 col-xs-12 text-right">
                             <div class="btn_group">
-                                <button type="button" class="btn btn-default" title="Tambah Data Kategori" id="btnTambah"><i class="fas fa-plus"></i></button>
+                                <button type="button" class="btn btn-default" id="btnTambah"><i class="fas fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
@@ -44,7 +43,7 @@
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>Nama Kategori</th>
+                                <th>Nama kategori</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -52,31 +51,17 @@
                             <?php foreach ($kategori as $p) : ?>
                                 <tr>
                                     <td>1</td>
-                                    <!-- <td><?= ++$start; ?></td> -->
-                                    <td><?= $p['nama_kategori']; ?></td>
+                                    <td><?= $p['nama_kategori'] ?></td>
                                     <td>
                                         <ul class="action-list">
                                             <li><a href="#" data-tip="edit" onclick="edit(<?= $p['id_kategori'] ?>)"><i class="fa fa-edit"></i></a></li>
-                                            <li><a href="<?= base_url('kategori/hapus/' . $p['id_kategori']) ?>" data-tip="delete" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus kategori ini?')"><i class="fa fa-trash"></i></a></li>
+                                            <li><a href="<?= site_url('kategori/hapus/' . $p['id_kategori']) ?>" data-tip="delete" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus Kategori ini?')"><i class="fa fa-trash"></i></a></li>
                                         </ul>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                </div>
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col col-sm-6 col-xs-6">
-                            <!-- Jumlah Data <b><?= $total_rows ?></b> -->
-                        </div>
-                        <div class="col-sm-6 col-xs-6">
-                            <!-- <?= $pagination_links;
-                                    ?> -->
-                            <ul class="pagination visible-xs pull-right">
-                            </ul>
-                        </div>
-                    </div>
                 </div>
 
             </div>
@@ -86,28 +71,101 @@
 </section>
 
 
-<div class="modal fade" id="modalkategori" tabindex="-1" role="dialog" aria-labelledby="modalkategoriLabel" aria-hidden="true">
+<div class="modal fade" id="modalKategori" tabindex="-1" role="dialog" aria-labelledby="modalKategoriLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="formkategori" method="POST" enctype="multipart/form-data">
+            <form id="fromKategori" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id_kategori" id="id_kategori">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalkategoriLabel">Tambah kategori</h5>
+                    <h5 class="modal-title" id="modalKategoriLabel">Tambah Kategori</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="id_kategori" id="id_kategori">
+
                     <div class="form-group">
-                        <label for="nama_kategori">Nama kategori</label>
+                        <label for="nama_kategori">Nama Kategori</label>
                         <input type="text" class="form-control" name="nama_kategori" id="nama_kategori" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    $('#btnTambah').on('click', function() {
+        $('#fromKategori')[0].reset();
+        $('#id_kategori').val('');
+        $('#modalKategoriLabel').text('Tambah Kategori');
+        $('#modalKategori').modal('show');
+    });
+
+
+    function edit(id) {
+        $.ajax({
+            url: 'http://localhost/garchik/kategori/getKategoriById/' + id,
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                if (response.status === 'success') {
+                    $('#id_kategori').val(response.data.id_kategori);
+                    $('#nama_kategori').val(response.data.nama_kategori);
+                    $('#modalKategoriLabel').text('Edit Kategori');
+                    $('#modalKategori').modal('show');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: response.message,
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Gagal mendapatkan data Kategori.',
+                });
+            }
+        });
+    }
+
+
+    $('#fromKategori').on('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const actionUrl = $('#id_kategori').val() ? '<?= site_url('kategori/ubah') ?>' : '<?= site_url('kategori/tambah') ?>';
+
+        $.ajax({
+            url: actionUrl,
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                console.log(response);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: $('#id_kategori').val() ? 'Kategori berhasil diperbarui.' : 'Kategori berhasil ditambahkan.',
+                }).then(() => {
+                    location.reload();
+                });
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Gagal menyimpan Kategori.',
+                });
+            }
+        });
+    });
+</script>
