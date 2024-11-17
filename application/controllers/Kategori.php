@@ -30,16 +30,46 @@ class Kategori extends CI_Controller
         ];
 
         if ($this->input->post('submit')) {
-            $this->load->view('admin/tambah_kategori', $data);
+            $this->load->view('admin/kategori', $data);
         } else {
             $this->Model_kategori->insertkategori($data);
             redirect('kategori');
         }
     }
 
-    public function getkategoriById($id)
+    public function getKategoriById($id)
     {
-        $data = $this->Model_kategori->getkategoriById($id);
-        echo json_encode($data);
+        $kategori = $this->Model_kategori->getKategoriById($id);
+        if ($kategori) {
+            echo json_encode(['status' => 'success', 'data' => $kategori]);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Kategori tidak ditemukan.']);
+        }
+    }
+
+    public function ubah()
+    {
+        $id_kategori = $this->input->post('id_kategori');
+        $data = [
+            'nama_kategori' => $this->input->post('nama_kategori')
+        ];
+
+        if ($this->Model_kategori->updateKategori($id_kategori, $data)) {
+            $this->session->set_flashdata('success', 'Kategori berhasil diperbarui.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal memperbarui Kategori.');
+        }
+
+        redirect('kategori');
+    }
+    public function hapus($id)
+    {
+        if ($this->Model_kategori->deleteKategori($id)) {
+            $this->session->set_flashdata('success', 'Kategori berhasil dihapus.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menghapus Kategori.');
+        }
+
+        redirect('kategori');
     }
 }
